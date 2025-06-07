@@ -1,5 +1,7 @@
+import { ToastContainer } from "react-toastify";
+import "react-toastify/ReactToastify.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Dashboard from "./pages/Dashboard";
+import Dashboard from './pages/Dashboard'
 import Login from "./pages/login";
 import Register from "./pages/register";
 import Header from "./components/Header";
@@ -8,7 +10,7 @@ function App() {
     <>
       <Router>
         <div className="container">
-          <Header/>
+          <Header />
           <Routes>
             <Route path="/" element={<Dashboard />} />
             <Route path="/login" element={<Login />} />
@@ -16,6 +18,7 @@ function App() {
           </Routes>
         </div>
       </Router>
+      <ToastContainer />
     </>
   );
 }
