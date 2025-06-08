@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import { FaUser } from "react-icons/fa";
 import { register, reset } from "../features/auth/AuthSlice";
 import Spinner from "../components/Spinner";
+
 function Register() {
   const [formData, setFormData] = useState({
     name: "",
@@ -29,7 +30,7 @@ function Register() {
       navigate("/");
     }
     dispatch(reset());
-  }, [user, isLoading, isError, isSuccess, navigate, dispatch]);
+  }, [user, isLoading, isError, isSuccess, navigate, dispatch, message]); 
   const onChange = (e) => {
     setFormData((prevState) => ({
       ...prevState,
@@ -42,12 +43,11 @@ function Register() {
       toast.error("Passwords do not match");
     } else {
       const userData = { name, email, password };
-
       dispatch(register(userData));
     }
   };
   if (isLoading) {
-    return <Spinner/>
+    return <Spinner />;
   }
   return (
     <>
@@ -69,17 +69,19 @@ function Register() {
               value={name}
               placeholder="Enter your name"
               onChange={onChange}
+              autoComplete="name"
             />
           </div>
           <div className="form-group">
             <input
-              type="text"
+              type="email"
               className="form-control"
               id="email"
               name="email"
               value={email}
               placeholder="Enter your email"
               onChange={onChange}
+              autoComplete="email"
             />
           </div>
           <div className="form-group">
@@ -91,6 +93,7 @@ function Register() {
               value={password}
               placeholder="Enter your password"
               onChange={onChange}
+              autoComplete="new-password"
             />
           </div>
           <div className="form-group">
@@ -102,6 +105,7 @@ function Register() {
               value={password2}
               placeholder="Confirm password"
               onChange={onChange}
+              autoComplete="new-password"
             />
           </div>
           <div className="form-group">

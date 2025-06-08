@@ -23,7 +23,7 @@ export const register = createAsyncThunk(
           error.response.data &&
           error.response.data.message) ||
         error.message ||
-        error.toSring();
+        error.toString();
       return thunkAPI.rejectWithValue(message);
     }
   }
@@ -37,7 +37,7 @@ export const login = createAsyncThunk("auth/login", async (user, thunkAPI) => {
     const message =
       (error.response && error.response.data && error.response.data.message) ||
       error.message ||
-      error.toSring();
+      error.toString();
     return thunkAPI.rejectWithValue(message);
   }
 });
@@ -68,7 +68,8 @@ export const authSlice = createSlice({
     });
     builder.addCase(register.rejected, (state, action) => {
       state.isLoading = false;
-      state.isSuccess = true;
+      state.isError = true;
+      state.isSuccess = false;
       state.message = action.payload;
       state.user = null;
     });
